@@ -1,0 +1,28 @@
+<script type="text/javascript">
+function findMinValue(numbers) {
+    if (numbers.length == 0) {
+        throw "must pass array with at least one number";
+    }
+
+    var head = numbers[0];
+    var tail = numbers.slice(1, numbers.length);
+
+    if (numbers.length == 1) {
+        // BASE CASE
+        return head;
+    } else {
+        // RECURSIVE CASE
+        var minOfTail = findMinValue(tail);
+        if (head < minOfTail) {
+            return head;
+        } else {
+            return minOfTail;
+        }
+    }
+}
+
+document.write(findMinValue([0, 1, 2, 3, 4]) + "<br />");
+document.write(findMinValue([1, 2, 3, 4, 0]) + "<br />");
+document.write(findMinValue([1, 2, 0, 3, 4]) + "<br />");
+document.write(findMinValue([42]) + "<br />");
+</script>

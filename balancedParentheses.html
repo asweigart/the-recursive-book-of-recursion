@@ -1,0 +1,46 @@
+<script type="text/javascript">
+function getBalancedParens(pairs, openRem, closeRem, current, indent) {
+    if (openRem === undefined) {
+        openRem = pairs;
+    }
+    if (closeRem === undefined) {
+        closeRem = pairs;
+    }
+    if (current === undefined) {
+        current = "";
+    }
+    if (indent === undefined) {
+        indent = 0;
+    }
+
+    document.write(".".repeat(indent) + "Start of pairs=" +
+    pairs + ", openRem=" + openRem + ", closeRem=" +
+    closeRem + ", current=\"" + current + "\"<br />");
+    if (openRem === 0 && closeRem === 0) {
+        // BASE CASE
+        document.write(".".repeat(indent) +
+        "1st base case. Returning " + [current] + "<br />");
+        return [current];
+    }
+
+    // RECURSIVE CASE
+    let results = [];
+    if (openRem > 0) {
+        document.write(".".repeat(indent) + "Adding open parenthesis.<br />");
+        Array.prototype.push.apply(results, getBalancedParens(
+        pairs, openRem - 1, closeRem, current + '(', indent + 1));
+    }
+    if (closeRem > openRem) {
+        document.write(".".repeat(indent) + "Adding close parenthesis.<br />");
+        results = results.concat(getBalancedParens(
+        pairs, openRem, closeRem - 1, current + ')', indent + 1));
+    }
+
+    // BASE CASE
+    document.write(".".repeat(indent) + "2nd base case. Returning " + results + "<br />");
+    return results;
+}
+
+document.write("<pre>All combinations of 2 balanced parentheses:<br />");
+document.write("Results: " + getBalancedParens(2) + "</pre>");
+</script>

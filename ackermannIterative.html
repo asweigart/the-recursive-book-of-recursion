@@ -1,0 +1,44 @@
+<script type="text/javascript">
+document.write("Starting with m = 2, n = 3:<br />");
+let callStack = [{"m": 2, "n": 3, "indentation": 0, "instrPtr": "start"}];
+let returnValue = null;
+
+while (callStack.length != 0) {
+    //document.write(callStack.length + ", ");
+    //debugger;
+    let m = callStack[callStack.length - 1].m;
+    let n = callStack[callStack.length - 1].n;
+    let indentation = callStack[callStack.length - 1].indentation;
+    let instrPtr = callStack[callStack.length - 1].instrPtr;
+
+    if (instrPtr === "start") {
+        document.write("&nbsp;".repeat(indentation) + "ackermann(" + m + ", " + n+ ")<br />");
+
+        if (m === 0) { // BASE CASE
+            returnValue = n + 1;
+            callStack.pop();
+            continue;
+        } else if (m > 0 && n === 0) { // RECURSIVE CASE
+            callStack[callStack.length - 1].instrPtr = "after first recursive case";
+            callStack.push({"m": m - 1, "n": 1, "indentation": indentation + 1, "instrPtr": "start"});
+            continue;
+        } else if (m > 0 && n > 0) { // RECURSIVE CASE
+            callStack[callStack.length - 1].instrPtr = "after second recursive case, inner call";
+            callStack.push({"m": m, "n": n - 1, "indentation": indentation + 1, "instrPtr": "start"});
+            continue;
+        }
+    } else if (instrPtr === "after first recursive case") {
+        callStack.pop();
+        continue;
+    } else if (instrPtr === "after second recursive case, inner call") {
+        callStack[callStack.length - 1].innerCallResult = returnValue;
+        callStack[callStack.length - 1].instrPtr = "after second recursive case, outer call";
+        callStack.push({"m": m - 1, "n": returnValue, "indentation": indentation + 1, "instrPtr": "start"});
+        continue;
+    } else if (instrPtr === "after second recursive case, outer call") {
+        callStack.pop();
+        continue;
+    }
+}
+document.write(returnValue + "<br />");
+</script>

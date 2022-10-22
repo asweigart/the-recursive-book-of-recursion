@@ -1,0 +1,26 @@
+<script type="text/javascript">
+function ackermann(m, n, indentation) {
+    if (indentation === undefined) {
+        indentation = 0;
+    }
+    document.write(" ".repeat(indentation) + "ackermann(" + m + ", " + n + ")\n");
+
+    if (m === 0) {
+        // BASE CASE
+        return n + 1;
+    } else if ((m > 0) && (n === 0)) {
+        // RECURSIVE CASE
+        return ackermann(m - 1, 1, indentation + 1);
+    } else if ((m > 0) && (n > 0)) {
+        // RECURSIVE CASE
+        return ackermann(m - 1, ackermann(m, n - 1, indentation + 1), indentation + 1);
+    }
+}
+
+document.write("<pre>");
+document.write("Starting with m = 1, n = 1:<br />");
+document.write(ackermann(1, 1) + "<br />");
+document.write("Starting with m = 2, n = 3:<br />");
+document.write(ackermann(2, 3) + "<br />");
+document.write("</pre>");
+</script>

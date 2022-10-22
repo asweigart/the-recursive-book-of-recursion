@@ -1,0 +1,40 @@
+<script type="text/javascript">
+function getPowerSet(chars, indent) {
+    if (indent === undefined) {
+        indent = 0;
+    }
+    let debugMsg = ".".repeat(indent) + 'In getPowerSet("' + chars + '")';
+    document.write(debugMsg + ", start.<br />");
+
+    if (chars == "") {
+        // BASE CASE
+        document.write(debugMsg + " base case returns ['']<br />");
+        return [''];
+    }
+
+    // RECURSIVE CASE
+    let powerSet = [];
+    let head = chars[0];
+    let tail = chars.slice(1, chars.length);
+
+    // First part, get the sets that don't include the head:
+    document.write(debugMsg +
+    " part 1, get sets without head '" + head + "'<br />");
+    let tailPowerSet = getPowerSet(tail, indent + 1);
+
+    // Second part, get the sets that include the head:
+    document.write(debugMsg +
+    " part 2, get sets with head '" + head + "'<br />");
+    for (tailSet of tailPowerSet) {
+        document.write(debugMsg + " New set " + head + tailSet + "<br />");
+        powerSet.push(head + tailSet);
+    }
+
+    powerSet = powerSet.concat(tailPowerSet);
+    document.write(debugMsg + " returning " + powerSet + "<br />");
+    return powerSet;
+}
+
+document.write("<pre>The power set of ABC:<br />")
+document.write(getPowerSet("ABC") + "<br /></pre>");
+</script>

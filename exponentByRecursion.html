@@ -1,0 +1,20 @@
+<script type="text/javascript">
+function exponentByRecursion(a, n) {
+    if (n === 1) {
+        // BASE CASE
+        return a;
+    } else if (n % 2 === 0) {
+        // RECURSIVE CASE (when n is even)
+        result = exponentByRecursion(a, n / 2);
+        return result * result;
+    } else if (n % 2 === 1) {
+        // RECURSIVE CASE (when n is odd)
+        result = exponentByRecursion(a, n - 1);
+        return result * a;
+    }
+}
+
+document.write(exponentByRecursion(3, 6) + "<br />");
+document.write(exponentByRecursion(10, 3) + "<br />");
+document.write(exponentByRecursion(17, 10) + "<br />");
+</script>

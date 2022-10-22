@@ -1,0 +1,20 @@
+<script type="text/javascript">
+root = {"data": "A", "children": [{"data": "B", "children":
+[{"data": "D", "children": []}]}, {"data": "C", "children":
+[{"data": "E", "children": [{"data": "G", "children": []},
+{"data": "H", "children": []}]}, {"data": "F", "children": []}]}]};
+
+function postorderTraverse(node) {
+    if (node["children"].length > 0) {
+        // RECURSIVE CASE
+        for (let i = 0; i < node["children"].length; i++) {
+            postorderTraverse(node["children"][i]);  // Traverse child nodes.
+        }
+    }
+    document.write(node["data"] + " ");  // Access this node's data.
+    // BASE CASE
+    return;
+}
+
+postorderTraverse(root);
+</script>

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+function fibonacci(nthNumber) {
+    let a = 1, b = 1;
+    let nextNum;
+    document.write("a = " + a + ", b = " + b + "<br />");
+    for (let i = 2; i < nthNumber; i++) {
+        nextNum = a + b; // Get the next Fibonacci number.
+        a = b;
+        b = nextNum;
+        document.write("a = " + a + ", b = " + b + "<br />");
+    }
+    return b;
+}
+
+document.write(fibonacci(10));
+</script>

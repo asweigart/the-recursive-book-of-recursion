@@ -1,0 +1,22 @@
+<script type="text/javascript">
+function rev(theString, accum='') {
+    if (theString.length === 0) {
+        // BASE CASE
+        return accum;
+    } else {
+        // RECURSIVE CASE
+        let head = theString[0];
+        let tail = theString.substring(1, theString.length);
+        return rev(tail, head + accum);
+    }
+}
+
+let text = "abcdef";
+document.write("The reverse of " + text + " is " + rev(text) + "<br />");
+text = "Hello, world!";
+document.write("The reverse of " + text + " is " + rev(text) + "<br />");
+text = "";
+document.write("The reverse of " + text + " is " + rev(text) + "<br />");
+text = "X";
+document.write("The reverse of " + text + " is " + rev(text) + "<br />");
+</script>

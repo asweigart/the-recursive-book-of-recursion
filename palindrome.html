@@ -1,0 +1,23 @@
+<script type="text/javascript">
+function isPalindrome(theString) {
+    if (theString.length === 0 || theString.length === 1) {
+        // BASE CASE
+        return true;
+    } else {
+        // RECURSIVE CASE
+        var head = theString[0];
+        var middle = theString.substring(1, theString.length -1);
+        var last = theString[theString.length - 1];
+        return head === last && isPalindrome(middle);
+    }
+}
+
+text = "racecar";
+document.write(text + " is a palindrome: " + isPalindrome(text) + "<br />");
+text = "amanaplanacanalpanama";
+document.write(text + " is a palindrome: " + isPalindrome(text) + "<br />");
+text = "tacocat";
+document.write(text + " is a palindrome: " + isPalindrome(text) + "<br />");
+text = "zophie";
+document.write(text + " is a palindrome: " + isPalindrome(text) + "<br />");
+</script>

@@ -1,0 +1,27 @@
+<script type="text/javascript">
+root = {"data": "A", "children": [{"data": "B", "children":
+[{"data": "D", "children": []}]}, {"data": "C", "children":
+[{"data": "E", "children": [{"data": "G", "children": []},
+{"data": "H", "children": []}]}, {"data": "F", "children": []}]}]};
+
+function getDepth(node) {
+    if (node.children.length === 0) {
+        // BASE CASE
+        return 0;
+    } else {
+        // RECURSIVE CASE
+        let maxChildDepth = 0;
+        for (let child of node.children) {
+            // Find the depth of each child node:
+            let childDepth = getDepth(child);
+            if (childDepth > maxChildDepth) {
+                // This child is deepest child node found so far:
+                maxChildDepth = childDepth;
+            }
+        }
+        return maxChildDepth + 1;
+    }
+}
+
+document.write("Depth of tree is " + getDepth(root) + "<br />");
+</script>

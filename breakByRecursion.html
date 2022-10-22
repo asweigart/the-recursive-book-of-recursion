@@ -1,0 +1,20 @@
+<script type="text/javascript">
+function theLoop(i) {
+    if (i < 4) { // Stops when false.
+        // The main code:
+        if (i === 2) { // The break condition.
+            // BASE CASE
+            return;
+        }
+        // RECURSIVE CASE
+        document.write(i + ' Hello!<br />');
+        theLoop(i + 1); // Increment i.
+        return;
+    } else {
+        // BASE CASE
+        return;
+    }
+}
+
+theLoop(0); // Start i at 0.
+</script>

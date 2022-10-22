@@ -1,0 +1,45 @@
+<script type="text/javascript">
+
+let fibonacciCache = {};  // Create the global cache.
+
+function fibonacci(nthNumber, indent) {
+    if (indent === undefined) {
+        indent = 0;
+    }
+    let indentation = '.'.repeat(indent);
+    document.write(indentation + "fibonacci(" + nthNumber + ") called.<br />");
+
+    if (nthNumber in fibonacciCache) {
+        // If the value was already cached, return it.
+        document.write(indentation +
+        "Returning memoized result: " + fibonacciCache[nthNumber] + "<br />");
+        return fibonacciCache[nthNumber];
+    }
+
+    if (nthNumber === 1 || nthNumber === 2) {
+        // BASE CASE
+        document.write(indentation +
+        "Base case fibonacci(" + nthNumber + ") returning 1.<br />");
+        fibonacciCache[nthNumber] = 1;  // Update the cache.
+        return 1;
+    } else {
+        // RECURSIVE CASE
+        document.write(indentation +
+        "Calling fibonacci(" + (nthNumber - 1) + ") (nthNumber - 1).<br />");
+        let result = fibonacci(nthNumber - 1, indent + 1);
+
+        document.write(indentation +
+        "Calling fibonacci(" + (nthNumber - 2) + ") (nthNumber - 2).<br />");
+        result = result + fibonacci(nthNumber - 2, indent + 1);
+
+        fibonacciCache[nthNumber] = result;  // Update the cache.
+        document.write(indentation + "Returning result: " + result + "<br />");
+        return result;
+    }
+}
+
+document.write("<pre>");
+document.write(fibonacci(10) + "<br />");
+document.write(fibonacci(10) + "<br />");
+document.write("</pre>");
+</script>

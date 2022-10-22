@@ -1,0 +1,22 @@
+<script type="text/javascript">
+function summation(numbers, i, accumulator) {
+    if (i === undefined) {
+        i = 0;
+    }
+    if (accumulator === undefined) {
+        accumulator = 0;
+    }
+
+    if (i === numbers.length) {
+        // BASE CASE
+        return accumulator;
+    } else {
+        // RECURSIVE CASE
+        return summation(numbers, i + 1, accumulator + numbers[i]);
+    }
+}
+
+document.write(summation([1, 2, 3, 4, 5]) + "<br />");
+document.write(summation([5, 2, 4, 8]) + "<br />");
+document.write(summation([1, 10, 100, 1000]) + "<br />");
+</script>

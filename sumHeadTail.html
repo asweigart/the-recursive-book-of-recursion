@@ -1,0 +1,18 @@
+<script type="text/javascript">
+function sum(numbers) {
+    if (numbers.length === 0) { // BASE CASE
+        return 0;
+    } else { // RECURSIVE CASE
+        let head = numbers[0];
+        let tail = numbers.slice(1, numbers.length);
+        return head + sum(tail);
+    }
+}
+
+let nums = [1, 2, 3, 4, 5];
+document.write('The sum of ' + nums + ' is ' + sum(nums) + "<br />");
+nums = [5, 2, 4, 8];
+document.write('The sum of ' + nums + ' is ' + sum(nums) + "<br />");
+nums = [1, 10, 100, 1000];
+document.write('The sum of ' + nums + ' is ' + sum(nums) + "<br />");
+</script>

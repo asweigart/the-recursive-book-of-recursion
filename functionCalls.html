@@ -1,0 +1,22 @@
+<script type="text/javascript">
+"use strict";
+function a() {
+    document.write("a() was called.<br />");
+    b();
+    c();
+    document.write("a() is returning.<br />");
+}
+
+function b() {
+    document.write("b() was called.<br />");
+    c();
+    document.write("b() is returning.<br />");
+}
+
+function c() {
+    document.write("c() was called.<br />");
+    document.write("c() is returning.<br />");
+}
+
+a();
+</script>

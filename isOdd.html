@@ -1,0 +1,32 @@
+<script type="text/javascript">
+
+function isOdd(number) {
+    if (number === 0) {
+        // BASE CASE
+        return false;
+    } else {
+        // RECURSIVE CASE
+        return !isOdd(number - 1);
+    }
+}
+
+document.write(isOdd(42) + "<br />");
+document.write(isOdd(99) + "<br />");
+
+function isOddTailCall(number, inversionAccum) {
+    if (inversionAccum === undefined) {
+        inversionAccum = false;
+    }
+
+    if (number === 0) {
+        // BASE CASE
+        return inversionAccum;
+    } else {
+        // RECURSIVE CASE
+        return isOddTailCall(number - 1, !inversionAccum);
+    }
+}
+
+document.write(isOddTailCall(42) + "<br />");
+document.write(isOddTailCall(99) + "<br />");
+</script>

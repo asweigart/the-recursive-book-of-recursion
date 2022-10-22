@@ -1,0 +1,35 @@
+<script type="text/javascript">
+function getPermsWithRep(chars, permLength, prefix) {
+    if (permLength === undefined) {
+        permLength = chars.length;
+    }
+    if (prefix === undefined) {
+        prefix = "";
+    }
+    let indent = ".".repeat(prefix.length);
+    document.write(indent + "Start, args=(\"" + chars + "\", " + permLength +
+    ", \"" + prefix + "\")<br />");
+
+    // BASE CASE
+    if (permLength === 0) {
+        document.write(indent + "Base case reached, returning " + [prefix] + "<br />");
+        return [prefix];
+    }
+
+    // RECURSIVE CASE
+    // Create a new prefix by adding each character to the current prefix.
+    let results = [];
+    document.write(indent + "Adding each char to prefix \"" + prefix + "\".<br />");
+    for (char of chars) {
+        let newPrefix = prefix + char;
+
+        // Decrease permLength by one because we added on character to the prefix.
+        results = results.concat(getPermsWithRep(chars, permLength - 1, newPrefix));
+    }
+    document.write(indent + "Returning " + results + "<br />");
+    return results;
+}
+
+document.write("<pre>All permutations with repetition of JPB123:<br />");
+document.write(getPermsWithRep('JPB123', 4) + "</pre>");
+</script>

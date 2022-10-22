@@ -1,0 +1,51 @@
+<script type="text/javascript">
+function quicksort(items, left, right) {
+    // By default, `left` and `right` span the entire range of `items`:
+    if (left === undefined) {
+        left = 0;  // `left` defaults to the 0 index.
+    }
+    if (right === undefined) {
+        right = items.length - 1;  // `right` defaults to the last index.
+    }
+
+    document.write("<br /><pre>quicksort() called on this range: [" +
+    items.slice(left, right + 1).join(", ") + "]</pre>");
+    document.write("<pre>................The full list is: [" + items.join(", ") + "]</pre>");
+
+    if (right <= left) {
+        // With only zero or one items, `items` is already sorted.
+        return;  // BASE CASE
+    }
+
+    // START OF THE PARTITIONING
+    let i = left;  // i starts at the left end of the range.
+    let pivotValue = items[right];  // Select the last value for the pivot.
+
+    document.write("<pre>....................The pivot is: " + pivotValue.toString() + "</pre>");
+
+    // Iterate up to, but not including, the pivot:
+    for (let j = left; j < right; j++) {
+        // If a value is less than the pivot, swap it so that it's on the
+        // left side of `items`:
+        if (items[j] <= pivotValue) {
+            // Swap these two values:
+            [items[i], items[j]] = [items[j], items[i]];
+            i++;
+        }
+    }
+
+    // Put the pivot on the left side of `items`:
+    [items[i], items[right]] = [items[right], items[i]];
+
+    document.write("<pre>....After swapping, the range is: [" + items.slice(left, right + 1).join(", ") + "]</pre>");
+    document.write("<pre>Recursively calling quicksort on: [" + items.slice(left, i).join(", ") + "] and [" + items.slice(i + 1, right + 1).join(", ") + "]</pre>");
+
+    // Call quicksort() on the two partitions:
+    quicksort(items, left, i - 1);   // RECURSIVE CASE
+    quicksort(items, i + 1, right);  // RECURSIVE CASE
+}
+
+let myList = [0, 7, 6, 3, 1, 2, 5, 4];
+quicksort(myList);
+document.write("<pre>Sorted: [" + myList.join(", ") + "]</pre>");
+</script>

@@ -1,0 +1,29 @@
+<script type="text/javascript">
+function binarySearchIterative(needle, haystack, left, right) {
+    if (left === undefined) {
+        left = 0;  // `left` defaults to the 0 index.
+    }
+    if (right === undefined) {
+        right = haystack.length - 1  // `right` defaults to the last index.
+    }
+
+    while (true) {
+        document.write("Searching: [" + haystack.slice(left, right + 1).join(", ") + "]<br />");
+
+        if (left > right) {
+            return null;  // The `needle` is not in `haystack`.
+        }
+
+        let mid = Math.floor((left + right) / 2);
+        if (needle == haystack[mid]) {
+            return mid;  // The `needle` has been found in `haystack`
+        } else if (needle < haystack[mid]) {
+            right = mid - 1;
+        } else if (needle > haystack[mid]) {
+            left = mid + 1;
+        }
+    }
+}
+
+document.write(binarySearchIterative(13, [1, 4, 8, 11, 13, 16, 19, 19]));
+</script>

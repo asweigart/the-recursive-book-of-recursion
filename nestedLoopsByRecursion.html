@@ -1,0 +1,28 @@
+<script type="text/javascript">
+function outerLoop(a) {
+    if (a < 5) {
+        // RECURSIVE CASE
+        document.write("Multiples of " + a + "<br />");
+        innerLoop(a, 1);
+        outerLoop(a + 1);
+        return;
+    } else {
+        // BASE CASE
+        return;
+    }
+}
+
+function innerLoop(a, b) {
+    if (b < 6) {
+        // RECURSIVE CASE
+        document.write(a + " times " + b + " is " + (a * b) + "<br />");
+        innerLoop(a, b + 1);
+        return;
+    } else {
+        // BASE CASE
+        return;
+    }
+}
+
+outerLoop(1);
+</script>

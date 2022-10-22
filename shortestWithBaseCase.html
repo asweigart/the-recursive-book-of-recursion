@@ -1,0 +1,21 @@
+<script type="text/javascript">
+function shortestWithBaseCase(makeRecursiveCall) {
+    document.write("shortestWithBaseCase(" + makeRecursiveCall + ") called.<br />");
+    if (makeRecursiveCall === false) {
+        // BASE CASE
+        document.write("Returning from base case.<br />");
+        return;
+    } else {
+        // RECURSIVE CASE
+        shortestWithBaseCase(false);
+        document.write("Returning from recursive case.<br />");
+        return;
+    }
+}
+
+document.write("Calling shortestWithBaseCase(false):<br />");
+shortestWithBaseCase(false);
+document.write("<br /><br />");
+document.write("Calling shortestWithBaseCase(true):<br />");
+shortestWithBaseCase(true);
+</script>

@@ -1,0 +1,35 @@
+<script type="text/javascript">
+function exponentWithPowerRule(a, n) {
+    // Step 1: Determine the operations to be performed.
+    let opStack = [];
+    while (n > 1) {
+        if (n % 2 === 0) {
+            // n is even
+            opStack.push("square");
+            n = Math.floor(n / 2);
+        } else if (n % 2 === 1) {
+            // n is odd
+            n -= 1;
+            opStack.push("multiply");
+        }
+    }
+
+    // Step 2: Perform the operations in reverse order.
+    let result = a; // Start result at `a`
+    while (opStack.length > 0) {
+        let op = opStack.pop();
+
+        if (op === "multiply") {
+            result = result * a;
+        } else if (op === "square") {
+            result = result * result;
+        }
+    }
+
+    return result;
+}
+
+document.write(exponentWithPowerRule(3, 6) + "<br />");
+document.write(exponentWithPowerRule(10, 3) + "<br />");
+document.write(exponentWithPowerRule(17, 10) + "<br />");
+</script>

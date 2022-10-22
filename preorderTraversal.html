@@ -1,0 +1,21 @@
+<script type="text/javascript">
+root = {"data": "A", "children": [{"data": "B", "children":
+[{"data": "D", "children": []}]}, {"data": "C", "children":
+[{"data": "E", "children": [{"data": "G", "children": []},
+{"data": "H", "children": []}]}, {"data": "F", "children": []}]}]};
+
+function preorderTraverse(node) {
+    document.write(node["data"] + " ");  // Access this node's data.
+    if (node["children"].length > 0) {
+        // RECURSIVE CASE
+        for (let i = 0; i < node["children"].length; i++) {
+
+            preorderTraverse(node["children"][i]);  // Traverse child nodes.
+        }
+    }
+    // BASE CASE
+    return;
+}
+
+preorderTraverse(root);
+</script>

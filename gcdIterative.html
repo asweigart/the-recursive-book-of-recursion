@@ -1,0 +1,14 @@
+<script type="text/javascript">
+function gcd(a, b) {
+    while (a !== 0) {
+        var temp = a;
+        a = b % a;
+        b = temp;
+    }
+    return b;
+}
+
+document.write(gcd(42, 28) + "<br />");
+document.write(gcd(28, 42) + "<br />");
+document.write(gcd(345, 766) + "<br />");
+</script>

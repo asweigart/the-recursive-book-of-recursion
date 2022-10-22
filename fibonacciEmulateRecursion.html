@@ -1,0 +1,51 @@
+<script type="text/javascript">
+let callStack = [];
+callStack.push({"returnAddr": "start", "nthNumber": 10});
+let returnValue;
+
+while (callStack.length > 0) {
+    let nthNumber = callStack[callStack.length - 1]["nthNumber"];
+    let returnAddr = callStack[callStack.length - 1]["returnAddr"];
+
+    if (returnAddr == "start") {
+        document.write("fibonacci(" + nthNumber + ") called.<br />");
+        if (nthNumber === 1 || nthNumber === 2) {
+            // BASE CASE
+            document.write("Base case fibonacci(" + nthNumber + ") returning 1.<br />");
+
+            // "Returns" the value in returnValue.
+            returnValue = 1;
+            callStack.pop();
+            continue;
+        } else {
+            // RECURSIVE CASE
+            document.write("Calling fibonacci(" + (nthNumber - 1) + ") (nthNumber - 1).<br />");
+
+            // "Calling" fibonacci(nthNumber - 1)
+            callStack[callStack.length - 1]["returnAddr"] = "after 1st recursive call";
+            callStack.push({"returnAddr": "start", "nthNumber": nthNumber - 1});
+            continue;
+        }
+    } else if (returnAddr == "after 1st recursive call") {
+        // Continuation of the recursive case.
+        callStack[callStack.length - 1]["result"] = returnValue;
+        document.write("Calling fibonacci(" + (nthNumber - 2) + ") (nthNumber - 2).<br />");
+
+        // "Calling" fibonacci(nthNumber - 2)
+        callStack[callStack.length - 1]["returnAddr"] = "after 2nd recursive call";
+        callStack.push({"returnAddr": "start", "nthNumber": nthNumber - 2});
+        continue;
+    } else if (returnAddr == "after 2nd recursive call") {
+        callStack[callStack.length - 1]["result"] = callStack[callStack.length - 1]["result"] + returnValue;
+        document.write("Call to fibonacci(" + nthNumber + ") returning " + callStack[callStack.length - 1]["result"] + ".<br />");
+
+        // "Returns" the value in returnValue.
+        returnValue = callStack[callStack.length - 1]["result"];
+        callStack.pop();
+        continue;
+    }
+
+}
+
+document.write(returnValue + "<br />");
+</script>

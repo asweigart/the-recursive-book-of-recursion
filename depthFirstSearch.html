@@ -1,0 +1,34 @@
+<script type="text/javascript">
+root = {'name': 'Alice', 'children': [{'name': 'Bob', 'children':
+[{'name': 'Darya', 'children': []}]}, {'name': 'Caroline',
+'children': [{'name': 'Eve', 'children': [{'name': 'Gonzalo',
+'children': []}, {'name': 'Hadassah', 'children': []}]}, {'name':
+'Fred', 'children': []}]}]};
+
+function find8LetterName(node, value) {
+    document.write("Visiting node " + node.name + "...<br />");
+
+    // Preorder depth-first search:
+    document.write("Checking if " + node.name + " is 8 letters...<br />");
+    if (node.name.length === 8) return node.name;  // BASE CASE
+
+    if (node.children.length > 0) {
+        // RECURSIVE CASE
+        for (let child of node.children) {
+            let returnValue = find8LetterName(child);
+            if (returnValue != null) {
+                return returnValue;
+            }
+        }
+    }
+
+    // Postorder depth-first search:
+    //document.write("Checking if " + node.name + " is 8 letters...<br />");
+    //if (node.name.length === 8) return node.name;  // BASE CASE
+
+    // Value was not found or there are no children:
+    return null;  // BASE CASE
+}
+
+document.write("Found an 8-letter name: " + find8LetterName(root));
+</script>

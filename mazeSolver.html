@@ -1,0 +1,134 @@
+<script type="text/javascript">
+// Create the maze data structure:
+// You can copy-paste this from inventwithpython.com/examplemaze.txt
+let MAZE = `
+#######################################################################
+#S#                 #       # #   #     #         #     #   #         #
+# ##### ######### # ### ### # # # # ### # # ##### # ### # # ##### # ###
+# #   #     #     #     #   # # #   # #   # #       # # # #     # #   #
+# # # ##### # ########### ### # ##### ##### ######### # # ##### ### # #
+#   #     # # #     #   #   #   #         #       #   #   #   #   # # #
+######### # # # ##### # ### # ########### ####### # # ##### ##### ### #
+#       # # # #     # #     # #   #   #   #     # # #   #         #   #
+# # ##### # # ### # # ####### # # # # # # # ##### ### ### ######### # #
+# # #   # # #   # # #     #     #   #   #   #   #   #     #         # #
+### # # # # ### # # ##### ####### ########### # ### # ##### ##### ### #
+#   # #   # #   # #     #   #     #       #   #     # #     #     #   #
+# ### ####### ##### ### ### ####### ##### # ######### ### ### ##### ###
+#   #         #     #     #       #   # #   # #     #   # #   # #   # #
+### ########### # ####### ####### ### # ##### # # ##### # # ### # ### #
+#   #   #       # #     #   #   #     #       # # #     # # #   # #   #
+# ### # # ####### # ### ##### # ####### ### ### # # ####### # # # ### #
+#     #         #     #       #           #     #           # #      E#
+#######################################################################
+`.split("\n");
+
+// Constants used in this program:
+const EMPTY = " ";
+const START = "S";
+const EXIT = "E";
+const PATH = ".";
+
+// Get the height and width of the maze:
+const HEIGHT = MAZE.length;
+let maxWidthSoFar = MAZE[0].length;
+for (let row of MAZE) {  // Set WIDTH to the widest row's width
+    if (row.length > maxWidthSoFar) {
+        maxWidthSoFar = row.length;
+    }
+}
+const WIDTH = maxWidthSoFar;
+// Make each row in the maze a list as wide as the WIDTH:
+for (let i = 0; i < MAZE.length; i++) {
+    MAZE[i] = MAZE[i].split("");
+    if (MAZE[i].length !== WIDTH) {
+        MAZE[i] = EMPTY.repeat(WIDTH).split("");  // Make this a blank row.
+    }
+}
+
+function printMaze(maze) {
+    document.write("<pre>");
+    for (let y = 0; y < HEIGHT; y++) {
+        // Print each row.
+        for (let x = 0; x < WIDTH; x++) {
+            // Print each column in this row.
+            document.write(maze[y][x]);
+        }
+        document.write("\n");  // Print a newline at the end of the row.
+    }
+    document.write("\n</ pre>");
+}
+
+function findStart(maze) {
+    for (let x = 0; x < WIDTH; x++) {
+        for (let y = 0; y < HEIGHT; y++) {
+            if (maze[y][x] === START) {
+                return [x, y];  // Return the starting coordinates.
+            }
+        }
+    }
+}
+
+function solveMaze(maze, x, y, visited) {
+    if (x === undefined || y === undefined) {
+        [x, y] = findStart(maze);
+        maze[y][x] = EMPTY;  // Get rid of the 'S' from the maze.
+    }
+    if (visited === undefined) {
+        visited = [];  // Create a new list of visited points.
+    }
+
+    if (maze[y][x] == EXIT) {
+        return true;  // Found the exit, return true.
+    }
+
+    maze[y][x] = PATH;  // Mark the path in the maze.
+    visited.push(String(x) + "," + String(y));
+    //printMaze(maze)  // Uncomment to view each forward step.
+
+    // Explore the north neighboring point:
+    if ((y + 1 < HEIGHT) && ((maze[y + 1][x] == EMPTY) ||
+    (maze[y + 1][x] == EXIT)) &&
+    (visited.indexOf(String(x) + "," + String(y + 1)) === -1)) {
+        // RECURSIVE CASE
+        if (solveMaze(maze, x, y + 1, visited)) {
+            return true;  // BASE CASE
+        }
+    }
+    // Explore the south neighboring point:
+    if ((y - 1 >= 0) && ((maze[y - 1][x] == EMPTY) ||
+    (maze[y - 1][x] == EXIT)) &&
+    (visited.indexOf(String(x) + "," + String(y - 1)) === -1)) {
+        // RECURSIVE CASE
+        if (solveMaze(maze, x, y - 1, visited)) {
+            return true;  // BASE CASE
+        }
+    }
+    // Explore the east neighboring point:
+    if ((x + 1 < WIDTH) && ((maze[y][x + 1] == EMPTY) ||
+    (maze[y][x + 1] == EXIT)) &&
+    (visited.indexOf(String(x + 1) + "," + String(y)) === -1)) {
+        // RECURSIVE CASE
+        if (solveMaze(maze, x + 1, y, visited)) {
+            return true;  // BASE CASE
+        }
+    }
+    // Explore the west neighboring point:
+    if ((x - 1 >= 0) && ((maze[y][x - 1] == EMPTY) ||
+    (maze[y][x - 1] == EXIT)) &&
+    (visited.indexOf(String(x - 1) + "," + String(y)) === -1)) {
+        // RECURSIVE CASE
+        if (solveMaze(maze, x - 1, y, visited)) {
+            return true;  // BASE CASE
+        }
+    }
+
+    maze[y][x] = EMPTY;  // Reset the empty space.
+    //printMaze(maze);  // Uncomment to view each backtrack step.
+    return false;  // BASE CASE
+}
+
+printMaze(MAZE);
+solveMaze(MAZE);
+printMaze(MAZE);
+</script>

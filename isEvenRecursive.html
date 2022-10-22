@@ -1,0 +1,20 @@
+<script type="text/javascript">
+function isEvenRecursive(num) {
+    if (num === 0) {  // BASE CASE
+        return true;
+    } else if (num === 1 || num === -1)  {  // BASE CASE
+        return false;
+    }
+
+    if (num > 0) {  // RECURSIVE CASE
+        return !isEvenRecursive(num - 1);
+    } else if (num < 0) {  // RECURSIVE CASE
+        return !isEvenRecursive(num + 1);
+    }
+}
+
+document.write(isEvenRecursive(42) + "<br />");
+document.write(isEvenRecursive(99) + "<br />");
+document.write(isEvenRecursive(0) + "<br />");
+document.write(isEvenRecursive(-4) + "<br />");
+</script>

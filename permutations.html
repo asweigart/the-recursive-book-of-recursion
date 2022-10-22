@@ -1,0 +1,34 @@
+<script type="text/javascript">
+function getPerms(chars, indent) {
+    if (indent === undefined) {
+        indent = 0;
+    }
+    document.write('.'.repeat(indent) + 'Start of getPerms("' + chars + '")<br />');
+    if (chars.length === 1) {
+        // BASE CASE
+        document.write('.'.repeat(indent) + "When chars = \"" + chars +
+        "\" base case returns " + chars + "<br />");
+        return [chars];
+    }
+    // RECURSIVE CASE
+    let permutations = [];
+    let head = chars[0];
+    let tail = chars.substring(1);
+    let tailPermutations = getPerms(tail, indent + 1);
+    for (tailPerm of tailPermutations) {
+        document.write('.'.repeat(indent) + "When chars = " + chars +
+        " putting head " + head + " in all places in " + tailPerm + "<br />");
+        for (let i = 0; i < tailPerm.length + 1; i++) {
+            let newPerm = tailPerm.slice(0, i) + head + tailPerm.slice(i);
+            document.write('.'.repeat(indent) + "New permutation: " + newPerm + "<br />");
+            permutations.push(newPerm);
+        }
+    }
+    document.write('.'.repeat(indent) + "When chars = " + chars +
+    " results are " + permutations + "<br />");
+    return permutations;
+}
+
+document.write("<pre>Permutations of \"ABCD\":<br />");
+document.write("Results: " + getPerms("ABCD") + "</pre>");
+</script>
